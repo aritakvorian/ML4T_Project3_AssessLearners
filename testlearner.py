@@ -148,9 +148,9 @@ def experiment_1(data, leaf_sizes=None, out_png="exp1_rmse.png"):
     plt.plot(leaf_sizes, out_rmse, marker='o')
     plt.xlabel("leaf_size")
     plt.ylabel("RMSE")
-    plt.title("Experiment 1 — DTLearner: RMSE vs leaf_size (in-sample & out-of-sample)")
-    plt.legend(["in-sample RMSE", "out-of-sample RMSE"])
-    plt.xscale('log' if max(leaf_sizes)/min(leaf_sizes) > 20 else 'linear')
+    plt.title("Experiment 1 — DTLearner: RMSE vs leaf_size")
+    plt.legend(["Train", "Test"])
+    # plt.xscale('log' if max(leaf_sizes)/min(leaf_sizes) > 20 else 'linear')
     plt.grid(True)
     plt.savefig(out_png, bbox_inches='tight')
     plt.close()
@@ -202,10 +202,10 @@ def experiment_2(data, leaf_sizes=None, bags=20, out_png="exp2_bagging_vs_dt.png
     plt.plot(leaf_sizes, dt_out_rmse, marker='o')
     plt.plot(leaf_sizes, bag_out_rmse, marker='o')
     plt.xlabel("leaf_size")
-    plt.ylabel("Out-of-sample RMSE")
-    plt.title(f"Experiment 2 — Bagging (bags={bags}) vs DTLearner: Out-of-sample RMSE")
-    plt.legend(["DT out-RMSE", f"Bagged DT ({bags}) out-RMSE"])
-    plt.xscale('log' if max(leaf_sizes)/min(leaf_sizes) > 20 else 'linear')
+    plt.ylabel("Test RMSE")
+    plt.title(f"Experiment 2 — Bagging (bags={bags}) vs DTLearner")
+    plt.legend(["DT Test", f"Bagged DT ({bags}) Test"])
+    # plt.xscale('log' if max(leaf_sizes)/min(leaf_sizes) > 20 else 'linear')
     plt.grid(True)
     plt.savefig(out_png, bbox_inches='tight')
     plt.close()
@@ -266,8 +266,8 @@ def experiment_3(data, leaf_sizes=None, trials=10, out_png_mae=None, out_png_r2=
         plt.title("Experiment 3 — DTLearner vs RTLearner (MAE)")
         plt.legend()
         plt.grid(True)
-        if max(leaf_sizes)/min(leaf_sizes) > 20:
-            plt.xscale('log')
+        # if max(leaf_sizes)/min(leaf_sizes) > 20:
+        #     plt.xscale('log')
         plt.tight_layout()
         plt.savefig(out_png_mae, bbox_inches='tight')
         plt.close()
@@ -316,7 +316,7 @@ if __name__ == "__main__":
     print("\n=== Running Experiment 1: Overfitting vs leaf_size (DTLearner) ===")
     experiment_1(
         data,
-        leaf_sizes=[1, 2, 5, 10, 25, 50, 75, 100],
+        leaf_sizes=[1, 2, 5, 10, 25, 50, 75, 100, 250, 500, 1000],
         out_png=os.path.join(img_dir, "exp1_rmse.png"),
     )
 
